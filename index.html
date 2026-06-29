@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayurveda Unfiltered Faculty Development</title>
+<style>
+  :root {
+    --indigo: #1A2B4C;
+    --gold: #C8932A;
+    --parchment: #F3EDE0;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #5A5A5A;
+    --border: #D8D0C0;
+    --success: #2E7D52;
+    --error: #B03A2E;
+    --card-bg: #FDFAF5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--parchment);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--indigo);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .nav-brand .brand-main {
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-brand .brand-sub {
+    color: #A0AABF;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 0.5rem; align-items: center; }
+  .nav-btn {
+    background: none;
+    border: 1.5px solid #A0AABF;
+    color: #E8E8E8;
+    padding: 0.35rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-family: Arial, sans-serif;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .nav-btn.primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--indigo);
+    font-weight: 700;
+  }
+  .nav-btn.primary:hover { background: #E0A830; }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--indigo);
+    color: var(--white);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 720px;
+    margin: 0 auto 1.2rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 1rem;
+    color: #B8C4D8;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.65;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-family: Arial, sans-serif;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-gold { background: var(--gold); color: var(--indigo); }
+  .btn-gold:hover { background: #E0A830; }
+  .btn-outline { background: none; border: 1.5px solid #A0AABF; color: #E8E8E8; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--gold);
+    padding: 1.2rem 2rem;
+    text-align: center;
+  }
+  .about-strip p {
+    color: var(--indigo);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── SESSIONS SECTION ── */
+  .section { padding: 3rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .section h2 {
+    font-size: 1.5rem;
+    color: var(--indigo);
+    margin-bottom: 0.5rem;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  /* ── SESSION CARDS ── */
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .session-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .session-card .track-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    width: fit-content;
+  }
+  .track-pedagogy { background: #E8F0FF; color: #1A3A8C; }
+  .track-subject { background: #FFF3E0; color: #7A4500; }
+  .track-research { background: #E8F5E9; color: #1B5E20; }
+  .session-card h3 { font-size: 0.97rem; color: var(--indigo); line-height: 1.35; }
+  .session-meta { font-size: 0.8rem; color: var(--muted); }
+  .session-meta span { display: block; }
+  .session-card .enroll-btn {
+    margin-top: auto;
+    padding: 0.5rem 1rem;
+    background: var(--indigo);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .session-card .enroll-btn:hover { background: #0F1D38; }
+  .session-card .enroll-btn:disabled {
+    background: var(--border);
+    color: var(--muted);
+    cursor: not-allowed;
+  }
+  .status-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 20px;
+    width: fit-content;
+  }
+  .pill-open { background: #E8F5E9; color: #2E7D52; }
+  .pill-upcoming { background: #FFF8E1; color: #8A6000; }
+  .pill-closed { background: #F5E0E0; color: #8A1A1A; }
+
+  /* ── TRACKS ── */
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .track-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .track-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  .track-card h3 { font-size: 0.97rem; color: var(--indigo); margin-bottom: 0.5rem; }
+  .track-card ul { list-style: none; padding: 0; }
+  .track-card ul li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.4;
+  }
+  .track-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* ── FACILITATOR ── */
+  .facilitator-section {
+    background: var(--indigo);
+    color: var(--white);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .facilitator-section .section-label { color: var(--gold); }
+  .facilitator-section h2 { color: var(--white); font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .facilitator-section .creds {
+    font-size: 0.78rem;
+    color: #A0AABF;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .facilitator-section p {
+    color: #C0CCD8;
+    font-size: 0.88rem;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  /* ── FORMS ── */
+  .form-page {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1rem;
+  }
+  .form-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 2.2rem;
+    width: 100%;
+    max-width: 480px;
+  }
+  .form-card .form-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .form-card h2 { font-size: 1.3rem; color: var(--indigo); margin-bottom: 1.5rem; }
+  .field { margin-bottom: 1.1rem; }
+  .field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--indigo);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.02em;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-family: Arial, sans-serif;
+    background: #FAFAFA;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--indigo);
+    background: var(--white);
+  }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--indigo);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.15s;
+  }
+  .submit-btn:hover { background: #0F1D38; }
+  .submit-btn:disabled { background: var(--border); cursor: not-allowed; }
+  .form-footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .form-footer a { color: var(--indigo); cursor: pointer; font-weight: 700; text-decoration: none; }
+  .form-footer a:hover { color: var(--gold); }
+  .alert {
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .alert-success { background: #E8F5E9; color: #1B5E20; border: 1px solid #A5D6A7; }
+  .alert-error { background: #FFEBEE; color: #8A1A1A; border: 1px solid #FFCDD2; }
+  .alert-info { background: #E3F2FD; color: #0D47A1; border: 1px solid #90CAF9; }
+
+  /* ── DASHBOARD ── */
+  .dashboard-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .dashboard-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .dashboard-header h2 { font-size: 1.3rem; color: var(--indigo); }
+  .dashboard-header p { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; }
+  .status-banner {
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .status-pending { background: #FFF8E1; border: 1.5px solid #FFD54F; color: #5A4000; }
+  .status-approved { background: #E8F5E9; border: 1.5px solid #81C784; color: #1B4A2A; }
+
+  /* ── ADMIN ── */
+  .admin-wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .admin-tabs { display: flex; gap: 0; margin-bottom: 2rem; border-bottom: 2px solid var(--border); }
+  .admin-tab {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: Arial, sans-serif;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .admin-tab.active { color: var(--indigo); border-bottom-color: var(--gold); }
+  .admin-tab:hover { color: var(--indigo); }
+  .admin-panel { display: none; }
+  .admin-panel.active { display: block; }
+
+  /* ── TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .data-table th {
+    background: var(--indigo);
+    color: var(--white);
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .data-table td {
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .data-table tr:hover td { background: #F8F3EA; }
+  .table-wrap { overflow-x: auto; background: var(--white); border: 1.5px solid var(--border); border-radius: 6px; }
+
+  .action-btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    margin-right: 0.3rem;
+    transition: all 0.15s;
+  }
+  .btn-approve { background: #E8F5E9; color: #1B5E20; }
+  .btn-approve:hover { background: #C8E6C9; }
+  .btn-reject { background: #FFEBEE; color: #8A1A1A; }
+  .btn-reject:hover { background: #FFCDD2; }
+  .btn-send-link { background: #E3F2FD; color: #0D47A1; }
+  .btn-send-link:hover { background: #BBDEFB; }
+  .btn-view { background: #F3EDE0; color: #5A3A00; }
+  .btn-view:hover { background: #E8DDD0; }
+
+  /* ── SESSION FORM (ADMIN) ── */
+  .session-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .session-form-grid .field { margin-bottom: 0; }
+  .session-form-grid .field-full { grid-column: 1 / -1; }
+
+  /* ── LOADING / SPINNER ── */
+  .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid var(--border);
+    border-top-color: var(--indigo);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 2rem auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal h3 { font-size: 1.1rem; color: var(--indigo); margin-bottom: 1rem; }
+  .modal-actions { display: flex; gap: 0.7rem; margin-top: 1.5rem; justify-content: flex-end; }
+  .modal-close {
+    padding: 0.5rem 1.2rem;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+  }
+  .modal-close:hover { border-color: var(--indigo); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+  }
+  .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .empty-state p { font-size: 0.88rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--indigo);
+    color: #A0AABF;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .field-row { grid-template-columns: 1fr; }
+    .session-form-grid { grid-template-columns: 1fr; }
+    .dashboard-header { flex-direction: column; }
+    nav { padding: 0 1rem; }
+    .nav-brand .brand-main { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <span class="brand-main">Ayurveda Unfiltered</span>
+    <span class="brand-sub">Faculty Development</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <button class="nav-btn" onclick="showPage('loginPage')">Sign In</button>
+    <button class="nav-btn primary" onclick="showPage('registerPage')">Register</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE: HOME -->
+<!-- ══════════════════════════════════════════ -->
+<div id="homePage" class="page active">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Faculty Development · Reform-Oriented · Practitioner-Led</div>
+    <h1>Training that <span>actually trains</span> Ayurveda faculty</h1>
+    <p>Live, structured sessions on pedagogy, subject depth, and research skills — for BAMS and MD/MS faculty who want more than a curriculum read-along.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="showPage('registerPage')">Register as Faculty</button>
+      <button class="btn btn-outline" onclick="document.getElementById('sessionsAnchor').scrollIntoView({behavior:'smooth'})">View Upcoming Sessions</button>
+    </div>
+  </div>
+
+  <div class="about-strip">
+    <p>Sessions are conducted live via Google Meet or Microsoft Teams &nbsp;·&nbsp; Moderated registration &nbsp;·&nbsp; Participation certificates issued</p>
+  </div>
+
+  <!-- SESSIONS -->
+  <div class="section" id="sessionsAnchor">
+    <div class="section-label">Upcoming Sessions</div>
+    <h2>Open for Enrolment</h2>
+    <p class="section-desc">Register once, then enrol for sessions relevant to your subject and role. All sessions are free. After your registration is approved, you will receive the session link by email.</p>
+    <div id="publicSessionsGrid" class="sessions-grid">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- TRACKS -->
+  <div style="background: #F0EAD8; padding: 3rem 2rem;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div class="section-label">Training Tracks</div>
+      <h2 style="color:var(--indigo); font-size:1.5rem; margin-bottom:0.5rem;">Three tracks. Real skills.</h2>
+      <p class="section-desc">Each session belongs to one of three structured tracks — choose what your role demands.</p>
+      <div class="tracks-grid">
+        <div class="track-card">
+          <div class="track-icon" style="background:#E8F0FF;">📐</div>
+          <h3>Track 1 — Pedagogical Skills</h3>
+          <ul>
+            <li>Writing learning objectives that work</li>
+            <li>Case-based teaching in Ayurveda classrooms</li>
+            <li>Designing formative assessments</li>
+            <li>Conducting OSCE and structured viva</li>
+            <li>Question paper design: competency, not memory</li>
+          </ul>
+        </div>
+        <div class="track-card">
+          <div class="track-icon" style="background:#FFF3E0;">🌿</div>
+          <h3>Track 2 — Subject-Specific Depth</h3>
+          <ul>
+            <li>Kayachikitsa · Shalya · Shalakya</li>
+            <li>Panchakarma · Dravyaguna · Rasashastra</li>
+            <li>Kriya Sharira · Rachana Sharira</li>
+            <li>What faculty commonly get wrong</li>
+            <li>Led by practising subject experts</li>
+          </ul>
+        </div>
+        <div class="track-card">
+          <div class="track-icon" style="background:#E8F5E9;">🔬</div>
+          <h3>Track 3 — Research & Scholarly Skills</h3>
+          <ul>
+            <li>Critically appraising an Ayurveda paper</li>
+            <li>Writing a CTRI-ready protocol</li>
+            <li>Biostatistics without fear</li>
+            <li>Supervising PG dissertations</li>
+            <li>Publication ethics and predatory journals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FACILITATOR -->
+  <div class="facilitator-section">
+    <div class="section-label">Your Facilitator</div>
+    <h2>Dr. Aakash Kembhavi</h2>
+    <div class="creds">MD (Ayu-Shalya), PGDMLS, MS (Counseling & Psychotherapy)<br>Academician, Clinician & Researcher · Chief Editor, International Journal of Ayurveda</div>
+    <p>Three decades of clinical practice, teaching, examination, and institutional leadership in Ayurvedic medicine. Founder of the Ayurveda Unfiltered platform — a space for reform-oriented, evidence-conscious scholarship within the tradition. These sessions carry the same spirit: honest, rigorous, and useful.</p>
+  </div>
+
+  <footer>
+    <div>Ayurveda Unfiltered Faculty Development &nbsp;·&nbsp; <a href="mailto:ayurvedaunfiltered@outlook.com">ayurvedaunfiltered@outlook.com</a></div>
+    <div style="margin-top:0.3rem;">An initiative of <a href="https://drkembhavi-s.github.io" target="_blank">Ayurveda Unfiltered</a> &nbsp;·&nbsp; Dr. Aakash Kembhavi, Hubli, Karnataka</div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE: REGISTER -->
+<!-- ══════════════════════════════════════════ -->
+<div id="registerPage" class="page">
+  <div class="form-page">
+    <div class="form-card">
+      <div class="form-eyebrow">Faculty Registration</div>
+      <h2>Create your account</h2>
+      <div id="registerAlert"></div>
+      <div class="field">
+        <label>Full Name *</label>
+        <input type="text" id="reg_name" placeholder="Dr. Firstname Lastname">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Designation *</label>
+          <select id="reg_designation">
+            <option value="">Select</option>
+            <option>Professor</option>
+            <option>Associate Professor</option>
+            <option>Assistant Professor</option>
+            <option>Lecturer</option>
+            <option>Senior Resident</option>
+            <option>Junior Resident / PG Scholar</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Department *</label>
+          <select id="reg_department">
+            <option value="">Select</option>
+            <option>Kayachikitsa</option>
+            <option>Shalya Tantra</option>
+            <option>Shalakya Tantra</option>
+            <option>Panchakarma</option>
+            <option>Prasuti & Stree Roga</option>
+            <option>Kaumarabhritya</option>
+            <option>Dravyaguna</option>
+            <option>Rasashastra & Bhaishajya Kalpana</option>
+            <option>Kriya Sharira</option>
+            <option>Rachana Sharira</option>
+            <option>Sanskrit & Samhita</option>
+            <option>Roga Nidana</option>
+            <option>Swasthavritta</option>
+            <option>Agad Tantra</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Institution *</label>
+        <input type="text" id="reg_institution" placeholder="College / Hospital name">
+      </div>
+      <div class="field">
+        <label>City & State *</label>
+        <input type="text" id="reg_location" placeholder="e.g. Bengaluru, Karnataka">
+      </div>
+      <div class="field">
+        <label>Email Address *</label>
+        <input type="email" id="reg_email" placeholder="you@email.com">
+      </div>
+      <div class="field">
+        <label>Mobile Number</label>
+        <input type="tel" id="reg_mobile" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="field">
+        <label>Password *</label>
+        <input type="password" id="reg_password" placeholder="Minimum 8 characters">
+      </div>
+      <div class="field">
+        <label>Why do you want to participate? <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+        <textarea id="reg_reason" placeholder="Brief statement — helps us understand your context"></textarea>
+      </div>
+      <button class="submit-btn" onclick="handleRegister()">Submit Registration</button>
+      <div class="form-footer">
+        Already registered? <a onclick="showPage('loginPage')">Sign in here</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE: LOGIN -->
+<!-- ══════════════════════════════════════════ -->
+<div id="loginPage" class="page">
+  <div class="form-page">
+    <div class="form-card">
+      <div class="form-eyebrow">Faculty Portal</div>
+      <h2>Sign in to your account</h2>
+      <div id="loginAlert"></div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="login_email" placeholder="you@email.com">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="login_password" placeholder="Your password">
+      </div>
+      <button class="submit-btn" onclick="handleLogin()">Sign In</button>
+      <div class="form-footer">
+        New to the platform? <a onclick="showPage('registerPage')">Register here</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE: FACULTY DASHBOARD -->
+<!-- ══════════════════════════════════════════ -->
+<div id="dashboardPage" class="page">
+  <div class="dashboard-wrap">
+    <div class="dashboard-header">
+      <div>
+        <h2 id="dashWelcome">Welcome back</h2>
+        <p id="dashMeta"></p>
+      </div>
+      <button class="nav-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <div id="dashStatusBanner"></div>
+
+    <div class="section-label" style="margin-bottom:0.4rem;">Your Enrolled Sessions</div>
+    <h2 style="color:var(--indigo);font-size:1.1rem;margin-bottom:1rem;">Sessions you have enrolled for</h2>
+    <div id="myEnrolments">
+      <div class="spinner"></div>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <div class="section-label" style="margin-bottom:0.4rem;">All Sessions</div>
+      <h2 style="color:var(--indigo);font-size:1.1rem;margin-bottom:1rem;">Browse and enrol for sessions</h2>
+      <div id="dashSessionsGrid" class="sessions-grid">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- PAGE: ADMIN DASHBOARD -->
+<!-- ══════════════════════════════════════════ -->
+<div id="adminPage" class="page">
+  <div class="admin-wrap">
+    <div class="dashboard-header">
+      <div>
+        <h2>Admin Panel</h2>
+        <p style="font-size:0.82rem;color:var(--muted)">Ayurveda Unfiltered Faculty Development</p>
+      </div>
+      <button class="nav-btn" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('tabRegistrations', this)">Registrations</button>
+      <button class="admin-tab" onclick="switchAdminTab('tabSessions', this)">Sessions</button>
+      <button class="admin-tab" onclick="switchAdminTab('tabEnrolments', this)">Enrolments</button>
+    </div>
+
+    <!-- TAB: REGISTRATIONS -->
+    <div id="tabRegistrations" class="admin-panel active">
+      <div style="display:flex;gap:0.8rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;">
+        <div style="font-size:0.8rem;color:var(--muted);">Filter:</div>
+        <button class="action-btn btn-view" onclick="loadRegistrations('pending')" id="filterPending">⏳ Pending</button>
+        <button class="action-btn btn-approve" onclick="loadRegistrations('approved')" id="filterApproved">✓ Approved</button>
+        <button class="action-btn btn-reject" onclick="loadRegistrations('rejected')" id="filterRejected">✗ Rejected</button>
+        <button class="action-btn" style="background:var(--indigo);color:white;" onclick="loadRegistrations('all')">All</button>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Designation</th>
+              <th>Department</th>
+              <th>Institution</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="registrationsBody">
+            <tr><td colspan="7"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: SESSIONS -->
+    <div id="tabSessions" class="admin-panel">
+      <div class="section-label" style="margin-bottom:1rem;">Add New Session</div>
+      <div class="session-form-grid">
+        <div class="field field-full">
+          <label>Session Title *</label>
+          <input type="text" id="s_title" placeholder="e.g. Designing Competency-Based Question Papers">
+        </div>
+        <div class="field">
+          <label>Track *</label>
+          <select id="s_track">
+            <option value="">Select Track</option>
+            <option value="pedagogy">Track 1 — Pedagogical Skills</option>
+            <option value="subject">Track 2 — Subject-Specific Depth</option>
+            <option value="research">Track 3 — Research & Scholarly Skills</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Target Audience</label>
+          <select id="s_audience">
+            <option>All Faculty</option>
+            <option>BAMS Faculty</option>
+            <option>PG Faculty (MD/MS)</option>
+            <option>PG Scholars</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Date *</label>
+          <input type="date" id="s_date">
+        </div>
+        <div class="field">
+          <label>Time *</label>
+          <input type="time" id="s_time">
+        </div>
+        <div class="field">
+          <label>Duration (minutes)</label>
+          <input type="number" id="s_duration" value="90" min="30" max="180">
+        </div>
+        <div class="field">
+          <label>Platform</label>
+          <select id="s_platform">
+            <option>Google Meet</option>
+            <option>Microsoft Teams</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label>Session Link (Meet/Teams URL)</label>
+          <input type="url" id="s_link" placeholder="https://meet.google.com/...">
+        </div>
+        <div class="field field-full">
+          <label>Description</label>
+          <textarea id="s_desc" placeholder="What will this session cover? What will faculty be able to do after attending?"></textarea>
+        </div>
+        <div class="field">
+          <label>Status</label>
+          <select id="s_status">
+            <option value="upcoming">Upcoming (not yet open)</option>
+            <option value="open">Open for Enrolment</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+        <div class="field" style="display:flex;align-items:flex-end;">
+          <button class="submit-btn" onclick="addSession()" style="margin-top:0;">Add Session</button>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-bottom:1rem;">All Sessions</div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Track</th>
+              <th>Date & Time</th>
+              <th>Platform</th>
+              <th>Status</th>
+              <th>Enrolments</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sessionsBody">
+            <tr><td colspan="7"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: ENROLMENTS -->
+    <div id="tabEnrolments" class="admin-panel">
+      <div class="field" style="max-width:320px;margin-bottom:1.2rem;">
+        <label>Filter by Session</label>
+        <select id="enrolmentFilter" onchange="loadEnrolments()">
+          <option value="all">All Sessions</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Faculty Name</th>
+              <th>Institution</th>
+              <th>Department</th>
+              <th>Session</th>
+              <th>Enrolled On</th>
+              <th>Attended</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="enrolmentsBody">
+            <tr><td colspan="7"><div class="spinner"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL: Faculty Detail -->
+<div class="modal-overlay" id="facultyModal">
+  <div class="modal">
+    <h3>Faculty Details</h3>
+    <div id="facultyModalContent"></div>
+    <div class="modal-actions">
+      <button class="modal-close" onclick="closeModal('facultyModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Send Link -->
+<div class="modal-overlay" id="sendLinkModal">
+  <div class="modal">
+    <h3>Send Session Link</h3>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">This will send the session link to the selected enrolled faculty member via EmailJS.</p>
+    <div id="sendLinkContent"></div>
+    <div class="field" style="margin-top:1rem;">
+      <label>Session Link to Send</label>
+      <input type="url" id="modalLink" placeholder="https://meet.google.com/...">
+    </div>
+    <div class="modal-actions">
+      <button class="modal-close" onclick="closeModal('sendLinkModal')">Cancel</button>
+      <button class="btn btn-gold" onclick="confirmSendLink()">Send Link Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FIREBASE + APP LOGIC ══════════════ -->
+<script type="module">
+  // ── FIREBASE CONFIG ──
+  // Replace the values below with your actual Firebase project config
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getAuth, createUserWithEmailAndPassword,
+    signInWithEmailAndPassword, signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import {
+    getFirestore, collection, doc, setDoc, getDoc,
+    getDocs, updateDoc, addDoc, query, where, orderBy,
+    serverTimestamp, Timestamp
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDq8q8xBOP6MKyBOgqT1brFaQ2B5KGKqI8",
+    authDomain: "ayurveda-unfiltered-faculty.firebaseapp.com",
+    projectId: "ayurveda-unfiltered-faculty",
+    storageBucket: "ayurveda-unfiltered-faculty.firebasestorage.app",
+    messagingSenderId: "1088639224636",
+    appId: "1:1088639224636:web:2c9b434bc3ae10638b6c39"
+  };
+
+  // ── EMAILJS CONFIG ──
+  // Sign up at emailjs.com (free tier) and replace these
+  const EMAILJS_SERVICE_ID  = "service_ox4weo5";
+  const EMAILJS_TEMPLATE_ID = "template_fwkbk0m";
+  const EMAILJS_PUBLIC_KEY  = "nypLk9Yr80aVzLFZm";
+  const ADMIN_EMAIL         = "ayurvedaunfiltered@outlook.com";
+
+  // ── ADMIN UIDs ──
+  // After first login as admin, paste your Firebase UID here
+  const ADMIN_UIDS = ["PASTE_YOUR_ADMIN_FIREBASE_UID_HERE"];
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  // ── Load EmailJS ──
+  const ejsScript = document.createElement('script');
+  ejsScript.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+  ejsScript.onload = () => { emailjs.init(EMAILJS_PUBLIC_KEY); };
+  document.head.appendChild(ejsScript);
+
+  // ── GLOBALS ──
+  let currentUser = null;
+  let currentProfile = null;
+  let sendLinkTarget = null; // { enrolmentId, facultyName, facultyEmail, sessionTitle }
+
+  // ── PAGE NAVIGATION ──
+  window.showPage = (pageId) => {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0, 0);
+    if (pageId === 'homePage') loadPublicSessions();
+    if (pageId === 'dashboardPage') initDashboard();
+    if (pageId === 'adminPage') initAdmin();
+  };
+
+  // ── AUTH STATE ──
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      currentUser = user;
+      const profileSnap = await getDoc(doc(db, 'faculty', user.uid));
+      if (profileSnap.exists()) {
+        currentProfile = profileSnap.data();
+        const isAdmin = ADMIN_UIDS.includes(user.uid);
+        updateNav(true, isAdmin);
+        if (isAdmin) {
+          showPage('adminPage');
+        } else {
+          showPage('dashboardPage');
+        }
+      }
+    } else {
+      currentUser = null;
+      currentProfile = null;
+      updateNav(false, false);
+    }
+  });
+
+  function updateNav(loggedIn, isAdmin) {
+    const nav = document.getElementById('navLinks');
+    if (loggedIn) {
+      nav.innerHTML = isAdmin
+        ? `<span style="color:#A0AABF;font-size:0.8rem;">Admin</span>
+           <button class="nav-btn" onclick="handleLogout()">Sign Out</button>`
+        : `<span style="color:#A0AABF;font-size:0.8rem;">${currentProfile?.name || ''}</span>
+           <button class="nav-btn" onclick="showPage('dashboardPage')">Dashboard</button>
+           <button class="nav-btn" onclick="handleLogout()">Sign Out</button>`;
+    } else {
+      nav.innerHTML = `
+        <button class="nav-btn" onclick="showPage('loginPage')">Sign In</button>
+        <button class="nav-btn primary" onclick="showPage('registerPage')">Register</button>`;
+    }
+  }
+
+  // ── REGISTER ──
+  window.handleRegister = async () => {
+    const name        = document.getElementById('reg_name').value.trim();
+    const designation = document.getElementById('reg_designation').value;
+    const department  = document.getElementById('reg_department').value;
+    const institution = document.getElementById('reg_institution').value.trim();
+    const location    = document.getElementById('reg_location').value.trim();
+    const email       = document.getElementById('reg_email').value.trim();
+    const mobile      = document.getElementById('reg_mobile').value.trim();
+    const password    = document.getElementById('reg_password').value;
+    const reason      = document.getElementById('reg_reason').value.trim();
+
+    if (!name || !designation || !department || !institution || !location || !email || !password) {
+      showAlert('registerAlert', 'Please fill all required fields.', 'error'); return;
+    }
+    if (password.length < 8) {
+      showAlert('registerAlert', 'Password must be at least 8 characters.', 'error'); return;
+    }
+
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await setDoc(doc(db, 'faculty', cred.user.uid), {
+        uid: cred.user.uid, name, designation, department,
+        institution, location, email, mobile, reason,
+        status: 'pending',
+        registeredAt: serverTimestamp()
+      });
+      showAlert('registerAlert',
+        '✓ Registration submitted. Your account is under review. You will be notified at ' + email + ' once approved.',
+        'success');
+    } catch (e) {
+      showAlert('registerAlert', e.message, 'error');
+    }
+  };
+
+  // ── LOGIN ──
+  window.handleLogin = async () => {
+    const email    = document.getElementById('login_email').value.trim();
+    const password = document.getElementById('login_password').value;
+    if (!email || !password) { showAlert('loginAlert', 'Enter your email and password.', 'error'); return; }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      showAlert('loginAlert', 'Incorrect email or password.', 'error');
+    }
+  };
+
+  // ── LOGOUT ──
+  window.handleLogout = async () => {
+    await signOut(auth);
+    showPage('homePage');
+  };
+
+  // ── PUBLIC SESSIONS (home page) ──
+  async function loadPublicSessions() {
+    const grid = document.getElementById('publicSessionsGrid');
+    grid.innerHTML = '<div class="spinner"></div>';
+    try {
+      const snap = await getDocs(query(
+        collection(db, 'sessions'),
+        where('status', 'in', ['open', 'upcoming']),
+        orderBy('date', 'asc')
+      ));
+      if (snap.empty) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div><p>No sessions currently open. Check back soon.</p></div>';
+        return;
+      }
+      grid.innerHTML = '';
+      snap.forEach(d => grid.appendChild(buildPublicSessionCard(d.id, d.data())));
+    } catch (e) { grid.innerHTML = '<p style="color:red;font-size:0.85rem;">Error loading sessions.</p>'; }
+  }
+
+  function buildPublicSessionCard(id, s) {
+    const card = document.createElement('div');
+    card.className = 'session-card';
+    const trackClass = { pedagogy: 'track-pedagogy', subject: 'track-subject', research: 'track-research' }[s.track] || 'track-pedagogy';
+    const trackLabel = { pedagogy: 'Pedagogical Skills', subject: 'Subject Depth', research: 'Research Skills' }[s.track] || s.track;
+    const dateStr = s.date ? new Date(s.date.seconds * 1000).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' }) : 'TBA';
+    const pillClass = s.status === 'open' ? 'pill-open' : s.status === 'upcoming' ? 'pill-upcoming' : 'pill-closed';
+    const pillLabel = s.status === 'open' ? 'Open' : s.status === 'upcoming' ? 'Upcoming' : 'Closed';
+    card.innerHTML = `
+      <span class="track-badge ${trackClass}">${trackLabel}</span>
+      <h3>${s.title}</h3>
+      <div class="session-meta">
+        <span>📅 ${dateStr} &nbsp;·&nbsp; ${s.time || ''}</span>
+        <span>⏱ ${s.duration || 90} min &nbsp;·&nbsp; ${s.platform || 'Google Meet'}</span>
+        <span>👥 ${s.audience || 'All Faculty'}</span>
+      </div>
+      <span class="status-pill ${pillClass}">${pillLabel}</span>
+      <button class="enroll-btn" onclick="showPage('registerPage')">Register to Enrol</button>`;
+    return card;
+  }
+
+  // ── FACULTY DASHBOARD ──
+  async function initDashboard() {
+    if (!currentProfile) return;
+    document.getElementById('dashWelcome').textContent = `Welcome, ${currentProfile.name}`;
+    document.getElementById('dashMeta').textContent = `${currentProfile.designation} · ${currentProfile.department} · ${currentProfile.institution}`;
+
+    // Status banner
+    const banner = document.getElementById('dashStatusBanner');
+    if (currentProfile.status === 'pending') {
+      banner.innerHTML = `<div class="status-banner status-pending">⏳ <strong>Registration under review.</strong> Dr. Kembhavi will approve your account shortly. You will receive a confirmation email at <strong>${currentProfile.email}</strong>.</div>`;
+    } else if (currentProfile.status === 'approved') {
+      banner.innerHTML = `<div class="status-banner status-approved">✓ <strong>Account approved.</strong> You can now enrol for sessions. Session links will be sent to your email automatically after approval.</div>`;
+    } else {
+      banner.innerHTML = `<div class="status-banner" style="background:#FFEBEE;border:1.5px solid #FFCDD2;color:#7A1A1A;">Your registration was not approved. Contact <a href="mailto:ayurvedaunfiltered@outlook.com">ayurvedaunfiltered@outlook.com</a> for queries.</div>`;
+    }
+
+    await loadMyEnrolments();
+    await loadDashSessions();
+  }
+
+  async function loadMyEnrolments() {
+    const wrap = document.getElementById('myEnrolments');
+    if (currentProfile?.status !== 'approved') {
+      wrap.innerHTML = '<p style="font-size:0.85rem;color:var(--muted);">Enrolment available once your account is approved.</p>';
+      return;
+    }
+    wrap.innerHTML = '<div class="spinner"></div>';
+    const snap = await getDocs(query(collection(db, 'enrolments'), where('facultyUid', '==', currentUser.uid)));
+    if (snap.empty) {
+      wrap.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>No sessions enrolled yet. Browse below and enrol.</p></div>';
+      return;
+    }
+    wrap.innerHTML = '<div class="sessions-grid"></div>';
+    const grid = wrap.querySelector('.sessions-grid');
+    for (const d of snap.docs) {
+      const e = d.data();
+      const sesSnap = await getDoc(doc(db, 'sessions', e.sessionId));
+      if (!sesSnap.exists()) continue;
+      const s = sesSnap.data();
+      const dateStr = s.date ? new Date(s.date.seconds * 1000).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'TBA';
+      const card = document.createElement('div');
+      card.className = 'session-card';
+      const trackClass = { pedagogy: 'track-pedagogy', subject: 'track-subject', research: 'track-research' }[s.track] || 'track-pedagogy';
+      card.innerHTML = `
+        <span class="track-badge ${trackClass}">${s.track}</span>
+        <h3>${s.title}</h3>
+        <div class="session-meta">
+          <span>📅 ${dateStr} &nbsp;·&nbsp; ${s.time || ''}</span>
+          <span>${s.platform || 'Google Meet'}</span>
+        </div>
+        ${e.linkSent
+          ? `<div class="alert alert-success" style="margin:0.5rem 0;">✓ Session link has been sent to your email.</div>`
+          : `<div class="alert alert-info" style="margin:0.5rem 0;">⏳ Session link will be sent to your email before the session.</div>`}
+        ${e.attended ? `<span class="status-pill pill-open">Attended ✓</span>` : ''}`;
+      grid.appendChild(card);
+    }
+  }
+
+  async function loadDashSessions() {
+    if (currentProfile?.status !== 'approved') return;
+    const grid = document.getElementById('dashSessionsGrid');
+    grid.innerHTML = '<div class="spinner"></div>';
+    const myEnrolSnap = await getDocs(query(collection(db, 'enrolments'), where('facultyUid', '==', currentUser.uid)));
+    const enrolledIds = new Set(myEnrolSnap.docs.map(d => d.data().sessionId));
+
+    const snap = await getDocs(query(collection(db, 'sessions'), where('status', 'in', ['open', 'upcoming']), orderBy('date', 'asc')));
+    if (snap.empty) {
+      grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div><p>No open sessions at the moment.</p></div>';
+      return;
+    }
+    grid.innerHTML = '';
+    snap.forEach(d => {
+      const s = d.data();
+      const alreadyEnrolled = enrolledIds.has(d.id);
+      const card = buildDashSessionCard(d.id, s, alreadyEnrolled);
+      grid.appendChild(card);
+    });
+  }
+
+  function buildDashSessionCard(id, s, enrolled) {
+    const card = document.createElement('div');
+    card.className = 'session-card';
+    const trackClass = { pedagogy: 'track-pedagogy', subject: 'track-subject', research: 'track-research' }[s.track] || 'track-pedagogy';
+    const trackLabel = { pedagogy: 'Pedagogical Skills', subject: 'Subject Depth', research: 'Research Skills' }[s.track] || s.track;
+    const dateStr = s.date ? new Date(s.date.seconds * 1000).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' }) : 'TBA';
+    card.innerHTML = `
+      <span class="track-badge ${trackClass}">${trackLabel}</span>
+      <h3>${s.title}</h3>
+      <div class="session-meta">
+        <span>📅 ${dateStr} &nbsp;·&nbsp; ${s.time || ''}</span>
+        <span>⏱ ${s.duration || 90} min &nbsp;·&nbsp; ${s.platform || 'Google Meet'}</span>
+        <span>👥 ${s.audience || 'All Faculty'}</span>
+      </div>
+      ${s.description ? `<p style="font-size:0.8rem;color:var(--muted);line-height:1.5;">${s.description}</p>` : ''}
+      <button class="enroll-btn" ${enrolled || s.status !== 'open' ? 'disabled' : ''} onclick="enrollSession('${id}')">
+        ${enrolled ? '✓ Enrolled' : s.status === 'open' ? 'Enrol for this Session' : 'Not Yet Open'}
+      </button>`;
+    return card;
+  }
+
+  window.enrollSession = async (sessionId) => {
+    if (!currentUser) return;
+    try {
+      await addDoc(collection(db, 'enrolments'), {
+        facultyUid: currentUser.uid,
+        facultyName: currentProfile.name,
+        facultyEmail: currentProfile.email,
+        facultyDept: currentProfile.department,
+        facultyInstitution: currentProfile.institution,
+        sessionId,
+        enrolledAt: serverTimestamp(),
+        linkSent: false,
+        attended: false
+      });
+      showAlert('', '', '');
+      await initDashboard();
+    } catch (e) { alert('Enrolment failed: ' + e.message); }
+  };
+
+  // ── ADMIN ──
+  function initAdmin() {
+    loadRegistrations('pending');
+    loadAdminSessions();
+    loadSessionFilter();
+  }
+
+  window.loadRegistrations = async (filter = 'pending') => {
+    const tbody = document.getElementById('registrationsBody');
+    tbody.innerHTML = '<tr><td colspan="7"><div class="spinner"></div></td></tr>';
+    let snap;
+    if (filter === 'all') {
+      snap = await getDocs(query(collection(db, 'faculty'), orderBy('registeredAt', 'desc')));
+    } else {
+      snap = await getDocs(query(collection(db, 'faculty'), where('status', '==', filter)));
+    }
+    if (snap.empty) {
+      tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><p>No ${filter} registrations.</p></div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = '';
+    snap.forEach(d => {
+      const f = d.data();
+      const pillClass = { pending: 'pill-upcoming', approved: 'pill-open', rejected: 'pill-closed' }[f.status] || '';
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${f.name}</strong></td>
+        <td>${f.designation}</td>
+        <td>${f.department}</td>
+        <td style="max-width:160px;">${f.institution}<br><span style="font-size:0.75rem;color:var(--muted);">${f.location}</span></td>
+        <td><a href="mailto:${f.email}" style="color:var(--indigo);font-size:0.82rem;">${f.email}</a></td>
+        <td><span class="status-pill ${pillClass}">${f.status}</span></td>
+        <td>
+          <button class="action-btn btn-view" onclick="viewFaculty('${d.id}')">View</button>
+          ${f.status !== 'approved' ? `<button class="action-btn btn-approve" onclick="updateStatus('${d.id}', 'approved', '${f.email}', '${f.name}')">Approve</button>` : ''}
+          ${f.status !== 'rejected' ? `<button class="action-btn btn-reject" onclick="updateStatus('${d.id}', 'rejected', '${f.email}', '${f.name}')">Reject</button>` : ''}
+        </td>`;
+      tbody.appendChild(row);
+    });
+  };
+
+  window.updateStatus = async (uid, status, email, name) => {
+    await updateDoc(doc(db, 'faculty', uid), { status });
+    // Send approval/rejection email
+    if (typeof emailjs !== 'undefined') {
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          to_name: name,
+          to_email: email,
+          subject: status === 'approved'
+            ? 'Your Ayurveda Unfiltered Faculty Development registration is approved'
+            : 'Regarding your Ayurveda Unfiltered Faculty Development registration',
+          message: status === 'approved'
+            ? `Dear ${name},\n\nYour registration on the Ayurveda Unfiltered Faculty Development platform has been approved. You can now sign in and enrol for sessions at our platform.\n\nOnce enrolled, the session link will be sent to this email address before each session.\n\nWarm regards,\nDr. Aakash Kembhavi\nAyurveda Unfiltered`
+            : `Dear ${name},\n\nThank you for registering on the Ayurveda Unfiltered Faculty Development platform. After review, we are unable to approve your registration at this time.\n\nFor queries, write to ayurvedaunfiltered@outlook.com.\n\nWarm regards,\nDr. Aakash Kembhavi\nAyurveda Unfiltered`,
+          from_name: 'Dr. Aakash Kembhavi — Ayurveda Unfiltered',
+          reply_to: ADMIN_EMAIL
+        });
+      } catch (e) { console.warn('EmailJS error:', e); }
+    }
+    loadRegistrations(status === 'approved' ? 'pending' : 'pending');
+  };
+
+  window.viewFaculty = async (uid) => {
+    const snap = await getDoc(doc(db, 'faculty', uid));
+    const f = snap.data();
+    document.getElementById('facultyModalContent').innerHTML = `
+      <table style="width:100%;font-size:0.85rem;border-collapse:collapse;">
+        ${[
+          ['Name', f.name], ['Designation', f.designation], ['Department', f.department],
+          ['Institution', f.institution], ['Location', f.location], ['Email', f.email],
+          ['Mobile', f.mobile || '—'], ['Status', f.status],
+          ['Reason', f.reason || '—']
+        ].map(([k,v]) => `<tr><td style="padding:0.4rem 0.6rem;color:var(--muted);font-size:0.78rem;white-space:nowrap;">${k}</td><td style="padding:0.4rem 0.6rem;">${v}</td></tr>`).join('')}
+      </table>`;
+    document.getElementById('facultyModal').classList.add('open');
+  };
+
+  // ── ADMIN SESSIONS ──
+  window.addSession = async () => {
+    const title    = document.getElementById('s_title').value.trim();
+    const track    = document.getElementById('s_track').value;
+    const audience = document.getElementById('s_audience').value;
+    const dateVal  = document.getElementById('s_date').value;
+    const time     = document.getElementById('s_time').value;
+    const duration = document.getElementById('s_duration').value;
+    const platform = document.getElementById('s_platform').value;
+    const link     = document.getElementById('s_link').value.trim();
+    const desc     = document.getElementById('s_desc').value.trim();
+    const status   = document.getElementById('s_status').value;
+    if (!title || !track || !dateVal || !time) { alert('Fill in title, track, date, and time.'); return; }
+    const date = Timestamp.fromDate(new Date(dateVal));
+    await addDoc(collection(db, 'sessions'), {
+      title, track, audience, date, time, duration: parseInt(duration),
+      platform, link, description: desc, status, createdAt: serverTimestamp()
+    });
+    ['s_title','s_link','s_desc'].forEach(id => document.getElementById(id).value = '');
+    await loadAdminSessions();
+    alert('Session added.');
+  };
+
+  async function loadAdminSessions() {
+    const tbody = document.getElementById('sessionsBody');
+    tbody.innerHTML = '<tr><td colspan="7"><div class="spinner"></div></td></tr>';
+    const snap = await getDocs(query(collection(db, 'sessions'), orderBy('date', 'asc')));
+    if (snap.empty) { tbody.innerHTML = '<tr><td colspan="7"><p style="padding:1rem;color:var(--muted);">No sessions yet.</p></td></tr>'; return; }
+    tbody.innerHTML = '';
+    for (const d of snap.docs) {
+      const s = d.data();
+      const dateStr = s.date ? new Date(s.date.seconds * 1000).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) : 'TBA';
+      // count enrolments
+      const enSnap = await getDocs(query(collection(db, 'enrolments'), where('sessionId', '==', d.id)));
+      const pillClass = { open: 'pill-open', upcoming: 'pill-upcoming', closed: 'pill-closed' }[s.status] || '';
+      const trackLabel = { pedagogy: 'Pedagogical', subject: 'Subject Depth', research: 'Research' }[s.track] || s.track;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${s.title}</strong></td>
+        <td>${trackLabel}</td>
+        <td>${dateStr}<br><span style="font-size:0.75rem;color:var(--muted);">${s.time || ''}</span></td>
+        <td>${s.platform}</td>
+        <td>
+          <span class="status-pill ${pillClass}">${s.status}</span>
+          <select onchange="changeSessionStatus('${d.id}', this.value)" style="margin-top:0.3rem;font-size:0.75rem;padding:0.2rem;">
+            <option value="">Change status</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="open">Open</option>
+            <option value="closed">Closed</option>
+          </select>
+        </td>
+        <td style="text-align:center;">${enSnap.size}</td>
+        <td>
+          <button class="action-btn btn-send-link" onclick="openSendLinkForSession('${d.id}', '${s.title.replace(/'/g,"\\'")}', '${s.link || ''}')">Send Links</button>
+        </td>`;
+      tbody.appendChild(row);
+    }
+  }
+
+  window.changeSessionStatus = async (id, status) => {
+    if (!status) return;
+    await updateDoc(doc(db, 'sessions', id), { status });
+    await loadAdminSessions();
+  };
+
+  // ── SEND LINKS ──
+  window.openSendLinkForSession = async (sessionId, sessionTitle, defaultLink) => {
+    const snap = await getDocs(query(
+      collection(db, 'enrolments'),
+      where('sessionId', '==', sessionId),
+      where('linkSent', '==', false)
+    ));
+    if (snap.empty) { alert('No pending recipients (all links already sent, or no enrolments).'); return; }
+    document.getElementById('sendLinkContent').innerHTML = `
+      <p style="font-size:0.85rem;margin-bottom:0.5rem;"><strong>Session:</strong> ${sessionTitle}</p>
+      <p style="font-size:0.85rem;color:var(--muted);">Will send to <strong>${snap.size}</strong> enrolled faculty who haven't received the link yet.</p>`;
+    document.getElementById('modalLink').value = defaultLink || '';
+    sendLinkTarget = { type: 'session', sessionId, sessionTitle, enrolments: snap.docs };
+    document.getElementById('sendLinkModal').classList.add('open');
+  };
+
+  window.confirmSendLink = async () => {
+    const link = document.getElementById('modalLink').value.trim();
+    if (!link) { alert('Enter the session link.'); return; }
+    if (!sendLinkTarget) return;
+    let sent = 0;
+    for (const d of sendLinkTarget.enrolments) {
+      const e = d.data();
+      try {
+        if (typeof emailjs !== 'undefined') {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_name: e.facultyName,
+            to_email: e.facultyEmail,
+            subject: `Session Link: ${sendLinkTarget.sessionTitle} — Ayurveda Unfiltered Faculty Development`,
+            message: `Dear ${e.facultyName},\n\nYou are enrolled for the session:\n"${sendLinkTarget.sessionTitle}"\n\nJoin using this link:\n${link}\n\nPlease join on time. If you have questions, write to ayurvedaunfiltered@outlook.com.\n\nWarm regards,\nDr. Aakash Kembhavi\nAyurveda Unfiltered Faculty Development`,
+            from_name: 'Dr. Aakash Kembhavi — Ayurveda Unfiltered',
+            reply_to: ADMIN_EMAIL
+          });
+        }
+        await updateDoc(doc(db, 'enrolments', d.id), { linkSent: true, sentLink: link });
+        sent++;
+      } catch (err) { console.warn('Failed for', e.facultyEmail, err); }
+    }
+    closeModal('sendLinkModal');
+    alert(`✓ Link sent to ${sent} faculty members.`);
+    await loadAdminSessions();
+  };
+
+  // ── ENROLMENTS TAB ──
+  async function loadSessionFilter() {
+    const sel = document.getElementById('enrolmentFilter');
+    const snap = await getDocs(query(collection(db, 'sessions'), orderBy('date', 'asc')));
+    snap.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d.id;
+      opt.textContent = d.data().title;
+      sel.appendChild(opt);
+    });
+  }
+
+  window.loadEnrolments = async () => {
+    const tbody = document.getElementById('enrolmentsBody');
+    tbody.innerHTML = '<tr><td colspan="7"><div class="spinner"></div></td></tr>';
+    const filter = document.getElementById('enrolmentFilter').value;
+    let snap;
+    if (filter === 'all') {
+      snap = await getDocs(collection(db, 'enrolments'));
+    } else {
+      snap = await getDocs(query(collection(db, 'enrolments'), where('sessionId', '==', filter)));
+    }
+    if (snap.empty) { tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><p>No enrolments found.</p></div></td></tr>'; return; }
+    tbody.innerHTML = '';
+    const sessions = {};
+    for (const d of snap.docs) {
+      const e = d.data();
+      if (!sessions[e.sessionId]) {
+        const sesSnap = await getDoc(doc(db, 'sessions', e.sessionId));
+        sessions[e.sessionId] = sesSnap.exists() ? sesSnap.data().title : 'Unknown Session';
+      }
+      const dateStr = e.enrolledAt ? new Date(e.enrolledAt.seconds * 1000).toLocaleDateString('en-IN') : '—';
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${e.facultyName}</strong></td>
+        <td style="font-size:0.8rem;">${e.facultyInstitution}</td>
+        <td style="font-size:0.8rem;">${e.facultyDept}</td>
+        <td style="font-size:0.8rem;">${sessions[e.sessionId]}</td>
+        <td style="font-size:0.78rem;color:var(--muted);">${dateStr}</td>
+        <td><span class="status-pill ${e.attended ? 'pill-open' : 'pill-upcoming'}">${e.attended ? 'Yes' : 'Pending'}</span></td>
+        <td>
+          ${!e.attended ? `<button class="action-btn btn-approve" onclick="markAttended('${d.id}')">Mark Attended</button>` : ''}
+        </td>`;
+      tbody.appendChild(row);
+    }
+  };
+
+  window.markAttended = async (enrolId) => {
+    await updateDoc(doc(db, 'enrolments', enrolId), { attended: true });
+    await loadEnrolments();
+  };
+
+  // ── UTILITIES ──
+  window.switchAdminTab = (tabId, btn) => {
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    if (tabId === 'tabSessions') loadAdminSessions();
+    if (tabId === 'tabEnrolments') { loadEnrolments(); }
+  };
+
+  window.closeModal = (id) => {
+    document.getElementById(id).classList.remove('open');
+    sendLinkTarget = null;
+  };
+
+  function showAlert(elId, msg, type) {
+    if (!elId) return;
+    const el = document.getElementById(elId);
+    if (!el) return;
+    if (!msg) { el.innerHTML = ''; return; }
+    el.innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+  }
+
+  // Load sessions on home page init
+  loadPublicSessions();
+</script>
+
+</body>
+</html>
