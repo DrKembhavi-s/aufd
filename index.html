@@ -558,8 +558,8 @@
     <span class="brand-sub">Faculty Development</span>
   </div>
   <div class="nav-links" id="navLinks">
-    <button class="nav-btn" onclick="showPage('loginPage')">Sign In</button>
-    <button class="nav-btn primary" onclick="showPage('registerPage')">Register</button>
+    <!-- Sign In / Register temporarily disabled. Admin: open site with #admin at the end of the URL -->
+    <span id="navAuthStub"></span>
   </div>
 </nav>
 
@@ -579,17 +579,32 @@
   </div>
 
   <div class="about-strip">
-    <p>Sessions are conducted live via Google Meet or Microsoft Teams &nbsp;·&nbsp; Moderated registration &nbsp;·&nbsp; Participation certificates issued</p>
+    <p>Sessions are conducted live via Google Meet or Microsoft Teams &nbsp;·&nbsp; Moderated registration &nbsp;·&nbsp; Certificates for eligible courses only</p>
+  </div>
+
+  <!-- FREE WEBINAR CARD -->
+  <div style="background:#1A2B4C;padding:2.5rem 1.5rem;">
+    <div style="max-width:900px;margin:0 auto;background:#FDFAF5;border:2px solid #C8932A;border-radius:8px;padding:2rem;font-family:Arial,sans-serif;">
+      <div style="font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:#C8932A;font-weight:700;margin-bottom:0.5rem;">Free Live Webinar &nbsp;·&nbsp; Open to All Ayurveda Teachers</div>
+      <h2 style="font-size:1.5rem;color:#1A2B4C;margin-bottom:0.5rem;">The Thinking Teacher: Why Ayurveda Faculty Need Development</h2>
+      <p style="color:#444;font-size:0.95rem;line-height:1.6;margin-bottom:0.8rem;">You were trained to practise and to know your subject. Were you ever trained to teach it? Join this free 120-minute session for BAMS and PG Ayurveda teachers: see where teaching in our colleges needs support, preview a six-module faculty development course (teaching craft, pedagogy, epistemology, ontology, class management systems and teaching practice), and watch a short live demonstration of one topic taught two ways.</p>
+      <p style="color:#1A2B4C;font-size:0.88rem;line-height:1.7;margin-bottom:1.2rem;"><strong>Format:</strong> Free · 120 minutes · Google Meet<br><strong>Date &amp; time:</strong> To be announced<br><strong>Host:</strong> Dr. Aakash Kembhavi</p>
+      <a id="webinarRegisterBtn" href="mailto:drkembhavi@astangawellness.com?subject=Register%20for%20the%20Free%20Webinar%3A%20The%20Thinking%20Teacher&body=Name%3A%0ADesignation%3A%0ACollege%3A%0ASubject%2FDepartment%3A%0AEmail%3A%0APhone%3A" style="display:inline-block;padding:0.7rem 1.6rem;background:#C8932A;color:#fff;border-radius:4px;font-size:0.9rem;font-weight:700;text-decoration:none;">Join the WhatsApp Group for this Free Webinar</a>
+      <p style="color:#6B6552;font-size:0.8rem;margin-top:0.8rem;">No form, no fee. Join the group for the date, the Google Meet link and updates.</p>
+      <p style="color:#1A2B4C;font-size:0.82rem;font-weight:700;margin-top:0.5rem;">Please note: No certificate of participation will be issued for this free webinar.</p>
+      <script>
+        // PASTE YOUR WHATSAPP GROUP INVITE LINK BETWEEN THE QUOTES (https://chat.whatsapp.com/...)
+        var WEBINAR_WHATSAPP_URL = "https://chat.whatsapp.com/DWKt03IV2JF8BhS6oSy53c?s=cl&p=a&iam=2";
+        if (WEBINAR_WHATSAPP_URL) { var b=document.getElementById("webinarRegisterBtn"); b.href=WEBINAR_WHATSAPP_URL; b.target="_blank"; b.rel="noopener"; }
+      </script>
+    </div>
   </div>
 
   <!-- SESSIONS -->
   <div class="section" id="sessionsAnchor">
     <div class="section-label">Upcoming Sessions</div>
-    <h2>Open for Enrolment</h2>
-    <p class="section-desc">Register once, then enrol for sessions relevant to your subject and role. All sessions are free. After your registration is approved, you will receive the session link by email.</p>
-    <div id="publicSessionsGrid" class="sessions-grid">
-      <div class="spinner"></div>
-    </div>
+    <h2>Courses and Webinars Will Be Launched Shortly</h2>
+    <div id="publicSessionsGrid" class="sessions-grid" style="display:none;"></div>
   </div>
 
   <!-- TRACKS -->
@@ -1151,6 +1166,8 @@
 
   // ── PAGE NAVIGATION ──
   window.showPage = (pageId) => {
+    // Registration/sign-in temporarily closed; admin can use #admin in the URL
+    if ((pageId==='registerPage'||pageId==='loginPage') && location.hash!=='#admin') { document.getElementById('webinarRegisterBtn')?.scrollIntoView({behavior:'smooth',block:'center'}); return; }
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
     window.scrollTo(0, 0);
@@ -1191,9 +1208,10 @@
            <button class="nav-btn" onclick="showPage('dashboardPage')">Dashboard</button>
            <button class="nav-btn" onclick="handleLogout()">Sign Out</button>`;
     } else {
-      nav.innerHTML = `
-        <button class="nav-btn" onclick="showPage('loginPage')">Sign In</button>
-        <button class="nav-btn primary" onclick="showPage('registerPage')">Register</button>`;
+      // Sign In / Register temporarily disabled for public; admin can append #admin to the URL
+      nav.innerHTML = (location.hash === '#admin')
+        ? `<button class="nav-btn" onclick="showPage('loginPage')">Sign In</button>`
+        : '';
     }
   }
 
