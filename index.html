@@ -128,6 +128,7 @@
   .btn-gold:hover { background: #E0A830; }
   .btn-outline { background: none; border: 1.5px solid #A0AABF; color: #E8E8E8; }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .btn.btn-inactive, .btn.btn-inactive:hover { cursor: default; pointer-events: none; opacity: 0.55; background: none; border: 1.5px solid #6F7A93; color: #A0AABF; }
 
   /* ── ABOUT STRIP ── */
   .about-strip {
@@ -573,8 +574,8 @@
     <h1>Training that <span>actually trains</span> Ayurveda faculty</h1>
     <p>Live, structured sessions on pedagogy, subject depth, and research skills — for BAMS and MD/MS faculty who want more than a curriculum read-along.</p>
     <div class="hero-actions">
-      <button class="btn btn-gold" onclick="showPage('registerPage')">Register as Faculty</button>
-      <button class="btn btn-outline" onclick="document.getElementById('sessionsAnchor').scrollIntoView({behavior:'smooth'})">View Upcoming Sessions</button>
+      <button class="btn btn-gold btn-inactive" disabled aria-disabled="true">Register as Faculty</button>
+      <button class="btn btn-outline btn-inactive" disabled aria-disabled="true">View Upcoming Sessions</button>
     </div>
   </div>
 
@@ -771,6 +772,7 @@
 <div id="registerPage" class="page">
   <div class="form-page">
     <div class="form-card">
+      <a onclick="showPage('homePage')" style="display:inline-block;margin-bottom:1rem;color:#C8932A;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;">&larr; Back to Home</a>
       <div class="form-eyebrow">Faculty Registration</div>
       <h2>Create your account</h2>
       <div id="registerAlert"></div>
@@ -852,6 +854,7 @@
 <div id="loginPage" class="page">
   <div class="form-page">
     <div class="form-card">
+      <a onclick="showPage('homePage')" style="display:inline-block;margin-bottom:1rem;color:#C8932A;font-size:0.85rem;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;">&larr; Back to Home</a>
       <div class="form-eyebrow">Faculty Portal</div>
       <h2>Sign in to your account</h2>
       <div id="loginAlert"></div>
